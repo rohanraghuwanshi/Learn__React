@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
 import { Component } from 'react';
+
+import './App.css';
 
 class App extends Component {
 
@@ -8,29 +8,30 @@ class App extends Component {
     super();
 
     this.state = {
-      string: 'Hello Rohan Raghuwanshi'
+      monsters: []
     }
+  }
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(
+        response => response.json()
+      )
+      .then(
+        users => this.setState(
+          {
+            monsters: users
+          }
+        )
+      );
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {this.state.string}
-          </a>
-          <br />
-          <button onClick={() => this.setState({ string: 'Hello Rohan' })}>Change Text</button>
-        </header>
+        {
+          this.state.monsters.map(monster => <h1 key={monster.id}>{monster.name}</h1>)
+        }
       </div>
     );
   }
