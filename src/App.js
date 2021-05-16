@@ -4,6 +4,14 @@ import { Component } from 'react';
 
 class App extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {
+      string: 'Hello Rohan Raghuwanshi'
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -18,8 +26,10 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
-        </a>
+            {this.state.string}
+          </a>
+          <br />
+          <button onClick={() => this.setState({ string: 'Hello Rohan' })}>Change Text</button>
         </header>
       </div>
     );
